@@ -3,12 +3,13 @@
   "id": "OcuFix",
   "name": "OcuFix",
   "author": "Otiosum",
-  "version": "0.1.0",
-  "description": "",
-  "gameVersion": "1.23.0",
+  "version": "0.2.0",
+  "description": "Automatically disable ASW and set game/Oculus service priority",
+  "gameVersion": "1.39.1",
   "dependsOn": {
-    "BSIPA": "^4.2.1",
-    "BeatSaberMarkupLanguage": "^1.6.1"
+    "BSIPA": "^4.3.2",
+    "BeatSaberMarkupLanguage": "^1.11.2",
+    "SiraUtil": "^3.1.0"
   },
   "features": []
 }
