@@ -6,6 +6,9 @@
     <checkbox-setting apply-on-change="true" value="SetPriority" text="Set server/runtime priority upon launch"/>
   </horizontal>
   <horizontal horizontal-fit="PreferredSize">
+    <checkbox-setting apply-on-change="true" value="OculusPriorityHigh" text="Use High priority for Oculus services (may fix Discord streaming)"/>
+  </horizontal>
+  <horizontal horizontal-fit="PreferredSize">
     <checkbox-setting apply-on-change="true" value="GamePriority" text="Set game priority upon launch"/>
   </horizontal>
   <horizontal horizontal-fit="PreferredSize">

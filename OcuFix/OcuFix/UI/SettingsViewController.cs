@@ -11,7 +11,7 @@ namespace OcuFix.UI
     [HotReload]
     public class OcuFixSettingsViewController : BSMLAutomaticViewController, INotifyPropertyChanged, IInitializable
     {
-        public string ResourceName => "OcuFix.Views.Settings.bsml";
+        public string ResourceName => "OcuFix.UI.Views.Settings.bsml";
         [UIValue("DisableASW")]
         public bool DisableASW
         {
@@ -30,6 +30,17 @@ namespace OcuFix.UI
             set 
             { 
                 PluginConfig.Instance.SetPriority = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [UIValue("OculusPriorityHigh")]
+        public bool OculusPriorityHigh
+        {
+            get => PluginConfig.Instance.OculusPriorityHigh;
+            set 
+            { 
+                PluginConfig.Instance.OculusPriorityHigh = value;
                 NotifyPropertyChanged();
             }
         }

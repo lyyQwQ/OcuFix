@@ -131,7 +131,7 @@
   
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
-    <EmbeddedResource Include="Views\Settings.bsml" />
+    <EmbeddedResource Include="UI\Views\Settings.bsml" />
   </ItemGroup>
   
 </Project>
