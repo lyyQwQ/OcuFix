@@ -23,30 +23,36 @@ namespace OcuFix
         private static ProcessPriorityClass _targetRuntimePriorityClass = ProcessPriorityClass.AboveNormal;
         private static void SwapRuntime()
         {
+            var targetPriority = Configuration.PluginConfig.Instance.OculusPriorityHigh ? ProcessPriorityClass.High : ProcessPriorityClass.AboveNormal;
+            
             var runtimeProcesses = Process.GetProcessesByName("oculus-platform-runtime");
             if (runtimeProcesses.Length == 0)
                 return;
 
             var runtimeProcess = runtimeProcesses[0];
-            if (runtimeProcess.PriorityClass != _targetRuntimePriorityClass)
+            if (runtimeProcess.PriorityClass != targetPriority)
             {
-                (runtimeProcess.PriorityClass, _targetRuntimePriorityClass) = (_targetRuntimePriorityClass, runtimeProcess.PriorityClass);
-                Plugin.Log.Info("Runtime priority set");
+                _targetRuntimePriorityClass = runtimeProcess.PriorityClass;
+                runtimeProcess.PriorityClass = targetPriority;
+                Plugin.Log.Info($"Runtime priority set to {targetPriority}");
             }
         }
 
         private static ProcessPriorityClass _targetServerPriorityClass = ProcessPriorityClass.AboveNormal;
         private static void SwapServer()
         {
+            var targetPriority = Configuration.PluginConfig.Instance.OculusPriorityHigh ? ProcessPriorityClass.High : ProcessPriorityClass.AboveNormal;
+            
             var serverProcesses = Process.GetProcessesByName("OVRServer_x64");
             if (serverProcesses.Length == 0)
                 return;
 
             var serverProcess = serverProcesses[0];
-            if (serverProcess.PriorityClass != _targetServerPriorityClass)
+            if (serverProcess.PriorityClass != targetPriority)
             {
-                (serverProcess.PriorityClass, _targetServerPriorityClass) = (_targetServerPriorityClass, serverProcess.PriorityClass);
-                Plugin.Log.Info("Server priority set");
+                _targetServerPriorityClass = serverProcess.PriorityClass;
+                serverProcess.PriorityClass = targetPriority;
+                Plugin.Log.Info($"Server priority set to {targetPriority}");
             }
         }
         

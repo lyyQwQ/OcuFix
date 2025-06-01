@@ -2,19 +2,16 @@
 using IPA.Config;
 using IPA.Config.Stores;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using BeatSaberMarkupLanguage.Settings;
 using OcuFix.Configuration;
+using OcuFix.Installers;
+using SiraUtil.Zenject;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using IPALogger = IPA.Logging.Logger;
 
 namespace OcuFix
 {
-    [Plugin(RuntimeOptions.SingleStartInit)]
+    [Plugin(RuntimeOptions.DynamicInit)]
     public class Plugin
     {
         internal static Plugin Instance { get; private set; }
@@ -22,7 +19,11 @@ namespace OcuFix
 
         private bool ShouldIgnore()
         {
-            if (!XRSettings.loadedDeviceName.ToLower().Contains("oculus") && PluginConfig.Instance.EnableChecks)
+            Log.Info($"XRSettings.loadedDeviceName: {XRSettings.loadedDeviceName}");
+            Log.Info($"Environment.CommandLine: {Environment.CommandLine}");
+            
+            // if (!XRSettings.loadedDeviceName.ToLower().Contains("oculus") && PluginConfig.Instance.EnableChecks)
+            if (!Environment.CommandLine.ToLower().Contains("oculus") && PluginConfig.Instance.EnableChecks)
             {
                 Plugin.Log.Warn("Oculus vrmode not set, ignoring");
                 return true;
@@ -38,13 +39,15 @@ namespace OcuFix
         }
 
         [Init]
-        public void Init(Config config, IPALogger logger)
+        public void Init(Config config, IPALogger logger, Zenjector zenjector)
         {
             Instance = this;
             Log = logger;
 
             PluginConfig.Instance = config.Generated<PluginConfig>();
-            BSMLSettings.instance.AddSettingsMenu("OcuFix", "OcuFix.Views.Settings.bsml", Configuration.PluginConfig.Instance);
+            
+            // Install our menu installer
+            zenjector.Install<OcuFixMenuInstaller>(Location.Menu);
         }
 
         [OnStart]

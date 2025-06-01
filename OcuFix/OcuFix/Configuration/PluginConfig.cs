@@ -10,6 +10,7 @@ namespace OcuFix.Configuration
 
         public virtual bool DisableASW { get; set; } = true;
         public virtual bool SetPriority { get; set; } = true;
+        public virtual bool OculusPriorityHigh { get; set; } = false;
         public virtual bool Restore { get; set; } = true;
         public virtual bool GamePriority { get; set; } = true;
         public virtual string DebugToolPath { get; set; } = @"C:\Program Files\Oculus\Support\oculus-diagnostics\OculusDebugToolCLI.exe";
